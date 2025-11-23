@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web PT bla bla - Sistem Manajemen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .login-form, .report-form, .menu {
+            display: none;
+        }
+        .login-form.show, .report-form.show, .menu.show {
+            display: block;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .menu ul {
+            list-style: none;
+            padding: 0;
+        }
+        .menu li {
+            margin-bottom: 10px;
+        }
+        .menu button {
+            width: auto;
+            padding: 10px 20px;
+        }
+        .content {
+            display: none;
+        }
+        .content.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Sistem Manajemen PT bla bla</h1>
+    </header>
+    <div class="container">
+        <!-- Menu Login -->
+        <div id="login-section" class="login-form show">
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <!-- Menu Pelaporan (Tanpa Login) -->
+        <div id="report-section" class="report-form show">
+            <h2>Menu Pelaporan</h2>
+            <p>Silakan isi laporan dengan data dan bukti yang jelas.</p>
+            <form id="report-form">
+                <label for="report-name">Nama Pelapor:</label>
+                <input type="text" id="report-name" required>
+                <label for="report-description">Deskripsi Laporan:</label>
+                <textarea id="report-description" rows="4" required></textarea>
+                <label for="report-evidence">Bukti (Upload File atau Link):</label>
+                <input type="file" id="report-evidence" accept="image/*,application/pdf">
+                <button type="submit">Kirim Laporan</button>
+            </form>
+        </div>
+
+        <!-- Menu Perusahaan (Setelah Login) -->
+        <div id="company-menu" class="menu">
+            <h2>Menu Perusahaan</h2>
+            <ul>
+                <li><button onclick="showContent('finance')">1. Data Keuangan Perusahaan</button></li>
+                <li><button onclick="showContent('mutation')">2. Input Data Mutasi Bank</button></li>
+                <li><button onclick="showContent('salary')">3. Input Data Gaji Karyawan</button></li>
+                <li><button onclick="showContent('employees')">4. Tampilkan Data Karyawan</button></li>
+                <li><button onclick="showContent('reports')">5. Hasil Pelaporan</button></li>
+                <li><button onclick="showContent('analysis')">6. Analisis Data Pelaporan (Pencocokan Mutasi dan Gaji)</button></li>
+            </ul>
+        </div>
+
+        <!-- Konten Dinamis -->
+        <div id="content-area">
+            <div id="finance" class="content">
+                <h3>Data Keuangan Perusahaan</h3>
+                <p>Di sini akan ditampilkan data keuangan perusahaan (misalnya laporan keuangan).</p>
+                <!-- Tambahkan tabel atau form sesuai kebutuhan -->
+            </div>
+            <div id="mutation" class="content">
+                <h3>Input Data Mutasi Bank</h3>
+                <form>
+                    <label for="mutation-date">Tanggal:</label>
+                    <input type="date" id="mutation-date" required>
+                    <label for="mutation-amount">Jumlah:</label>
+                    <input type="number" id="mutation-amount" required>
+                    <label for="mutation-description">Deskripsi:</label>
+                    <textarea id="mutation-description" rows="2"></textarea>
+                    <button type="submit">Simpan</button>
+                </form>
+            </div>
+            <div id="salary" class="content">
+                <h3>Input Data Gaji Karyawan</h3>
+                <form>
+                    <label for="employee-id">ID Karyawan:</label>
+                    <input type="text" id="employee-id" required>
+                    <label for="salary-amount">Jumlah Gaji:</label>
+                    <input type="number" id="salary-amount" required>
+                    <label for="salary-period">Periode:</label>
+                    <input type="month" id="salary-period" required>
+                    <button type="submit">Simpan</button>
+                </form>
+            </div>
+            <div id="employees" class="content">
+                <h3>Data Karyawan</h3>
+                <p>Daftar karyawan akan ditampilkan di sini.</p>
+                <!-- Tambahkan tabel data karyawan -->
+            </div>
+            <div id="reports" class="content">
+                <h3>Hasil Pelaporan</h3>
+                <p>Hasil laporan yang telah dikirim akan ditampilkan di sini.</p>
+                <!-- Tambahkan daftar laporan -->
+            </div>
+            <div id="analysis" class="content">
+                <h3>Analisis Data Pelaporan</h3>
+                <p>Analisis pencocokan mutasi bank dan gaji karyawan akan ditampilkan di sini.</p>
+                <!-- Tambahkan logika analisis -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Hardcoded login credentials
+        const validUsername = 'admin';
+        const validPassword = 'admin';
+
+        // Handle login
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            if (username === validUsername && password === validPassword) {
+                document.getElementById('login-section').classList.remove('show');
+                document.getElementById('company-menu').classList.add('show');
+                alert('Login berhasil!');
+            } else {
+                alert('Username atau password salah!');
+            }
+        });
+
+        // Handle report submission
+        document.getElementById('report-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Laporan berhasil dikirim! (Simulasi saja)');
+            // Di sini bisa tambahkan logika untuk menyimpan laporan
+        });
+
+        // Function to show content
+        function showContent(sectionId) {
+            // Hide all contents
+            const contents = document.querySelectorAll('.content');
+            contents.forEach(content => content.classList.remove('show'));
+            // Show selected content
+            document.getElementById(sectionId).classList.add('show');
+        }
+    </script>
+</body>
+</html>
